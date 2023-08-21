@@ -105,16 +105,17 @@ LauncherBase {
             Layout.fillWidth: true
             Layout.preferredHeight: 70
             Layout.minimumHeight: implicitHeight
-            enabled: (isVersionsInitialized && playVerChannel.licenseStatus > 1 /* Fail or Succeeded */ ) && !(playDownloadTask.active || apkExtractionTask.active || updateChecker.active || !checkSupport()) && (gameLauncher.running || getDisplayedVersionName()) && (googleLoginHelper.account !== null || !LAUNCHER_ENABLE_GOOGLE_PLAY_LICENCE_CHECK)
+            enabled: true
 
             onClicked: {
                 if(gameLauncher.running) {
                     gameLogWindow.show();
                     gameLauncher.logAttached();
-                } else if(googleLoginHelper.account !== null && !playVerChannel.hasVerifiedLicense || !LAUNCHER_ENABLE_GOOGLE_PLAY_LICENCE_CHECK) {
-                    playVerChannel.playApi = null;
-                    playVerChannel.playApi = playApiInstance;
                 } else {
+                    if(googleLoginHelper.account !== null && !playVerChannel.hasVerifiedLicense) {
+                        playVerChannel.playApi = null;
+                        playVerChannel.playApi = playApiInstance;
+                    }
                     if (needsDownload()) {
                         if (googleLoginHelper.account === null) {
                             launcherSettingsWindow.show();
