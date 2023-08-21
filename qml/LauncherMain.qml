@@ -100,12 +100,11 @@ LauncherBase {
         PlayButton {
             id: pbutton
             Layout.alignment: Qt.AlignHCenter
-            text: (isVersionsInitialized && playVerChannel.licenseStatus > 1 /* Fail or Succeeded */ ) ? ((googleLoginHelper.account !== null && playVerChannel.hasVerifiedLicense || !LAUNCHER_ENABLE_GOOGLE_PLAY_LICENCE_CHECK) ? (gameLauncher.running ? qsTr("Open log") : (checkSupport() ? (needsDownload() ? (googleLoginHelper.account !== null ? (profileManager.activeProfile.versionType === ProfileInfo.LATEST_GOOGLE_PLAY && googleLoginHelper.hideLatest ? qsTr("Please sign in again") : qsTr("Download and play")) : qsTr("Sign in")) : qsTr("Play")) : qsTr("Unsupported Version"))).toUpperCase() : qsTr("Ask Google Again")) : qsTr("Please wait...")
+            text: (isVersionsInitialized && playVerChannel.licenseStatus > 1 /* Fail or Succeeded */ ) ? ((googleLoginHelper.account !== null && playVerChannel.hasVerifiedLicense || !LAUNCHER_ENABLE_GOOGLE_PLAY_LICENCE_CHECK) ? (gameLauncher.running ? qsTr("Open log") : (checkSupport() ? (needsDownload() ? (googleLoginHelper.account !== null ? (profileManager.activeProfile.versionType === ProfileInfo.LATEST_GOOGLE_PLAY && googleLoginHelper.hideLatest ? qsTr("Please sign in again") : qsTr("Download and play")) : qsTr("Sign in")) : qsTr("Play")) : qsTr("Unsupported Version"))).toUpperCase() : qsTr("Ask Google Again")) : qsTr("Activated?")
             subText: (isVersionsInitialized && ( googleLoginHelper.account == null || playVerChannel.licenseStatus > 1 /* Fail or Succeeded */) ) ? ((googleLoginHelper.account !== null && playVerChannel.hasVerifiedLicense || !LAUNCHER_ENABLE_GOOGLE_PLAY_LICENCE_CHECK) ? (gameLauncher.running ? qsTr("Game is running") : (getDisplayedVersionName() ? ("Minecraft " + getDisplayedVersionName()).toUpperCase() : qsTr("Please wait..."))) : "Failed to obtain apk url") : "..."
             Layout.fillWidth: true
             Layout.preferredHeight: 70
             Layout.minimumHeight: implicitHeight
-            enabled: true
 
             onClicked: {
                 if(gameLauncher.running) {
